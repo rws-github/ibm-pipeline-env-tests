@@ -5,14 +5,14 @@ _num_tests=0
 _num_failures=0
 
 # Java 7
-./unit-test-cli.sh "Java 7" "java is not available or not version 1.7.0" 'java -version | grep "java version \"1.7.0\""' 'java -version' >> _temp.xml
+./unit-test-cli.sh "Java 7" "java is not available or not version 1.7.0" 'java -version 2>&1 | grep "java version \"1.7.0\""' 'java -version' >> _temp.xml
 _test_exit_code=$?
 source update_suite_totals.sh
 
 # Java 8
 export ORIGINAL_PATH=$PATH
 export PATH=$JAVA8_HOME/bin:$PATH
-./unit-test-cli.sh "Java 8" "java is not available or not version 1.8.0" 'java -version | grep "java version \"1.8.0\""' 'java -version' >> _temp.xml
+./unit-test-cli.sh "Java 8" "java is not available or not version 1.8.0" 'java -version 2>&1 | grep "java version \"1.8.0\""' 'java -version' >> _temp.xml
 _test_exit_code=$?
 export PATH=$ORIGINAL_PATH
 source update_suite_totals.sh

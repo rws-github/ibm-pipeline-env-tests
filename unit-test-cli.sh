@@ -12,7 +12,7 @@ else
 	if [ -z "$4" ]; then
 		cat _test_output.log
 	else
- 		eval $4
+ 		eval $4 2>&1
 	fi
 	echo "</failure></testcase>"
 fi
