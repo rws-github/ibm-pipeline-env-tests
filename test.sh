@@ -4,6 +4,19 @@ echo "" > _temp.xml
 _num_tests=0
 _num_failures=0
 
+# Java 7
+./unit-test-cli.sh "Java 7" "java is not available or not version 1.7.0" 'java -version | grep "java version \"1.7.0\""' 'java -version' >> _temp.xml
+_test_exit_code=$?
+source update_suite_totals.sh
+
+# Java 8
+export ORIGINAL_PATH=$PATH
+export PATH=$JAVA8_HOME/bin:$PATH
+./unit-test-cli.sh "Java 8" "java is not available or not version 1.8.0" 'java -version | grep "java version \"1.8.0\""' 'java -version' >> _temp.xml
+_test_exit_code=$?
+export PATH=$ORIGINAL_PATH
+source update_suite_totals.sh
+
 # Gradle
 ./unit-test-cli.sh "Gradle 1.12" "gradle is not available or not version 1.12" 'gradle -v | grep "Gradle 1.12"' 'gradle -v' >> _temp.xml
 _test_exit_code=$?
